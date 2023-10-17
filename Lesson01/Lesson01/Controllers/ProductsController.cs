@@ -1,84 +1,109 @@
 ﻿using Lesson01.Models;
+using Lesson01.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lesson01.Controllers
 {
     public class ProductsController : Controller
     {
-        List<Product> products = new List<Product>();
-
+        private readonly ProductService _productService;
         public ProductsController()
         {
-            PopulateData();
+             _productService = new ProductService();
         }
-
-        public IActionResult Index()
-        {
+        // GET: ProductsController
+        public ActionResult Index()
+        {  var products=_productService.GetProducts();
             return View(products);
         }
 
-        public IActionResult Details(int id)
-        {
-            var product = products.FirstOrDefault(x => x.Id == id);
-
+        // GET: ProductsController/Details/5
+        public ActionResult Details(int id)
+        {  
+            var product =_productService.FindById(id);
             if (product is null)
             {
-                return View("Not Found");
+                return View("Error! Product not found");
             }
-
             return View(product);
         }
 
-        public IActionResult Edit(int id)
+        // GET: ProductsController/Create
+        public ActionResult Create()
         {
-            var product = products.FirstOrDefault(x => x.Id == id);
+            return View();
+        }
 
+        // POST: ProductsController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Product newProduct)
+        {
+            try
+            {
+                _productService.Create(newProduct);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: ProductsController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var product = _productService.FindById(id);
             if (product is null)
             {
-                return View("Not Found");
+                return View("Error! Product not found");
             }
-
             return View(product);
         }
 
-        public IActionResult Delete(int id)
+        // POST: ProductsController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Product productToUpdate)
         {
-            var product = products.FirstOrDefault(x => x.Id == id);
-
-            if (product is null)
-            {
-                return View("Not Found");
+            try
+            {  
+                _productService.Update(productToUpdate);
+                return RedirectToAction(nameof(Index));
             }
-
-            return View(product);
-
+            catch
+            {
+                return View();
+            }
         }
 
-        private void PopulateData()
+        // GET: ProductsController/Delete/5
+        public ActionResult Delete(int id)
         {
-            products.Add(new Product()
-            {
-                Id = 1,
-                Name = "Snikers",
-                Description = "Sweet",
-                Price = 500
-            });
 
-            products.Add(new Product()
+            var product = _productService.FindById(id);
+            if (product is null)
             {
-                Id = 2,
-                Name = "Twix",
-                Description = "Sweet",
-                Price = 550
-            });
+                return View("Error! Product not found");
+            }
+            return View(product);
+        }
 
-            products.Add(new Product()
+        // POST: ProductsController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Product product)
+        {
+            try
+            {   
+                _productService.Delete(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
             {
-                Id = 3,
-                Name = "Mars",
-                Description = "Sweet",
-                Price = 510
-            });
+                return View();
+            }
         }
     }
 }
