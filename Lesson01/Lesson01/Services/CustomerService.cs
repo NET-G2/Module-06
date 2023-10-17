@@ -8,7 +8,7 @@ namespace Lesson01.Services
         private static List<Customer> _customers = new List<Customer>();
         public CustomerService()
         {
-           LoadDataFromJson();
+            LoadDataFromJson();
         }
         public IEnumerable<Customer> GetCustomers() => _customers;
         public Customer? FindById(int id) => _customers.FirstOrDefault(x => x.Id == id);
