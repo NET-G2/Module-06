@@ -1,4 +1,5 @@
 ﻿using Lesson01.Models;
+using Newtonsoft.Json;
 
 namespace Lesson01.Services
 {
@@ -7,15 +8,17 @@ namespace Lesson01.Services
         private static List<Category> _categories = new List<Category>();
         public CategoryService()
         {
-            PopulateData();
+           LoadDataFromJson();
         }
 
         public IEnumerable<Category> GetCategories() => _categories;
 
+        public void Create(Category category)
+        {
+            _categories.Add(category);
+            SaveDataToJson();
+        }
         public Category? FindById(int id) => _categories.FirstOrDefault(x => x.Id == id);
-
-        public void Create(Category category) => _categories.Add(category);
-
         public void Update(Category categoryToUpdate)
         {
             var category = FindById(categoryToUpdate.Id);
@@ -24,6 +27,7 @@ namespace Lesson01.Services
             {
                 category.Name = categoryToUpdate.Name;
                 category.NumberOfProducts = categoryToUpdate.NumberOfProducts;
+                SaveDataToJson();
             }
         }
 
@@ -31,49 +35,21 @@ namespace Lesson01.Services
         {
             var category = FindById(id);
             _categories.Remove(category);
+            SaveDataToJson();
         }
 
-        private void PopulateData()
+        public void SaveDataToJson()
         {
-            if (_categories.Count > 0)
+            string json=JsonConvert.SerializeObject(_categories, Formatting.Indented);
+            File.WriteAllText("categories.json", json);
+        }
+        public void LoadDataFromJson()
+        {
+            if (File.Exists("categories.json"))
             {
-                return;
+                string json = File.ReadAllText("categories.json");
+                _categories = JsonConvert.DeserializeObject<List<Category>>(json);
             }
-
-            _categories.Add(new Category()
-            {
-                Id = 1,
-                Name = "Drinks",
-                NumberOfProducts = 20,
-            });
-
-            _categories.Add(new Category()
-            {
-                Id = 2,
-                Name = "Sweets",
-                NumberOfProducts = 150,
-            });
-
-            _categories.Add(new Category()
-            {
-                Id = 3,
-                Name = "Fruits",
-                NumberOfProducts = 67,
-            });
-
-            _categories.Add(new Category()
-            {
-                Id = 4,
-                Name = "Vegatables",
-                NumberOfProducts = 24,
-            });
-
-            _categories.Add(new Category()
-            {
-                Id = 5,
-                Name = "Milks",
-                NumberOfProducts = 32,
-            });
         }
     }
 }

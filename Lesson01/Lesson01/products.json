@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Name": "Snikers",
+    "Description": "Sweet",
+    "Price": 500.0
+  },
+  {
+    "Id": 2,
+    "Name": "Twix",
+    "Description": "Sweet",
+    "Price": 550.0
+  },
+  {
+    "Id": 3,
+    "Name": "Mars",
+    "Description": "Sweet",
+    "Price": 510.0
+  },
+  {
+    "Id": 4,
+    "Name": "Metro",
+    "Description": "sweet",
+    "Price": 8000.0
+  }
+]
