@@ -1,35 +1,36 @@
 ﻿using Lesson01.Models;
 using Lesson01.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lesson01.Controllers
 {
-    public class ProductsController : Controller
+    public class CustomersController : Controller
     {
-        private readonly ProductService _productService;
+        private readonly CustomerService _customerService;
 
-        public ProductsController()
+        public CustomersController()
         {
-            _productService = new ProductService();
+            _customerService = new CustomerService();
         }
 
         // GET: CustomersController
         public ActionResult Index()
         {
-            var product = _productService.GetProducts();
-            return View(product);
+            var customer = _customerService.GetCustomers();
+            return View(customer);
         }
 
         // GET: CustomersController/Details/5
         public ActionResult Details(int id)
         {
-            var product = _productService.FindById(id);
+            var customer = _customerService.FindById(id);
 
-            if (product is null)
+            if (customer is null)
             {
-                return View("Product not found");
+                return View("Customer not found");
             }
-            return View(product);
+            return View(customer);
         }
 
         // GET: CustomersController/Create
@@ -41,11 +42,11 @@ namespace Lesson01.Controllers
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product newProduct)
+        public ActionResult Create(Customer newCustomer)
         {
             try
             {
-                _productService.Create(newProduct);
+                _customerService.Create(newCustomer);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -57,24 +58,24 @@ namespace Lesson01.Controllers
         // GET: CustomersController/Edit/5
         public ActionResult Edit(int id)
         {
-            var product = _productService.FindById(id);
+            var customer = _customerService.FindById(id);
 
-            if (product is null)
+            if (customer is null)
             {
-                return View("Product not found");
+                return View("Customer not found");
             }
 
-            return View(product);
+            return View(customer);
         }
 
         // POST: CustomersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Product productToUpdate)
+        public ActionResult Edit(int id, Customer customerToUpdate)
         {
             try
             {
-                _productService.Update(productToUpdate);
+                _customerService.Update(customerToUpdate);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -86,13 +87,13 @@ namespace Lesson01.Controllers
         // GET: CustomersController/Delete/5
         public ActionResult Delete(int id)
         {
-            var product = _productService.FindById(id);
-            if (product is null)
+            var customer = _customerService.FindById(id);
+            if (customer is null)
             {
-                View("Product not found");
+                View("Customer not found");
             }
 
-            return View(product);
+            return View(customer);
         }
 
         // POST: CustomersController/Delete/5
@@ -102,7 +103,7 @@ namespace Lesson01.Controllers
         {
             try
             {
-                _productService.Delete(id);
+                _customerService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

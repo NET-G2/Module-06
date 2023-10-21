@@ -1,20 +1,24 @@
 ﻿using Lesson01.Models;
+using System.IO;
+using System.Text.Json;
 
 namespace Lesson01.Services
 {
     public class CategoryService
     {
-        private static List<Category> _categories = new List<Category>();
-        public CategoryService()
-        {
-            PopulateData();
-        }
+        public static string path = "D:\\github darslar\\Module-06\\Lesson01\\Lesson01\\Data\\categoriesData.json";
+        public static List<Category> _categories = CategoriesDiserialize();
+        
 
         public IEnumerable<Category> GetCategories() => _categories;
 
         public Category? FindById(int id) => _categories.FirstOrDefault(x => x.Id == id);
 
-        public void Create(Category category) => _categories.Add(category);
+        public void Create(Category category)
+        {
+            _categories.Add(category);
+            CategoriesSerialization(_categories);
+        }
 
         public void Update(Category categoryToUpdate)
         {
@@ -24,56 +28,53 @@ namespace Lesson01.Services
             {
                 category.Name = categoryToUpdate.Name;
                 category.NumberOfProducts = categoryToUpdate.NumberOfProducts;
+                CategoriesSerialization(_categories);
             }
         }
 
         public void Delete(int id)
         {
             var category = FindById(id);
-            _categories.Remove(category);
+            if (category != null)
+            {
+                _categories.Remove(category);
+                CategoriesSerialization(_categories);
+            }
         }
 
-        private void PopulateData()
+
+        public static List<Category> CategoriesDiserialize()
         {
-            if (_categories.Count > 0)
+            var categories = new List<Category>();
+
+            if (File.Exists(path))
             {
-                return;
+                string json = File.ReadAllText(path);
+
+                categories = JsonSerializer.Deserialize<List<Category>>(json);
+
+                return categories ?? new List<Category>();
             }
 
-            _categories.Add(new Category()
-            {
-                Id = 1,
-                Name = "Drinks",
-                NumberOfProducts = 20,
-            });
+            return categories;
+        }
 
-            _categories.Add(new Category()
+        private void CategoriesSerialization(List<Category> category)
+        {
+            if (!File.Exists(path))
             {
-                Id = 2,
-                Name = "Sweets",
-                NumberOfProducts = 150,
-            });
+                File.Create(path).Close();
 
-            _categories.Add(new Category()
-            {
-                Id = 3,
-                Name = "Fruits",
-                NumberOfProducts = 67,
-            });
+                string json = JsonSerializer.Serialize(category, new JsonSerializerOptions { WriteIndented = true });
 
-            _categories.Add(new Category()
-            {
-                Id = 4,
-                Name = "Vegatables",
-                NumberOfProducts = 24,
-            });
+                File.WriteAllText(path, json);
+            }
 
-            _categories.Add(new Category()
+            else
             {
-                Id = 5,
-                Name = "Milks",
-                NumberOfProducts = 32,
-            });
+                string json = JsonSerializer.Serialize(category, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(path, json);
+            }
         }
     }
 }

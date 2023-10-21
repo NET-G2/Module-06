@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "Name": "Zikirillo",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998911564348",
+    "Eamil": "zikirillo@gmail.com"
+  },
+  {
+    "Id": 2,
+    "Name": "Anvar",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998901234567",
+    "Eamil": "anvar@gmail.com"
+  },
+  {
+    "Id": 3,
+    "Name": "Muhammadali",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998945000505",
+    "Eamil": "muhammadali@gmail.com"
+  },
+  {
+    "Id": 4,
+    "Name": "Azamat",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998991010101",
+    "Eamil": "azamat@gmail.com"
+  },
+  {
+    "Id": 5,
+    "Name": "Axrorbek",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998952020202",
+    "Eamil": "axrorbek@gmail.com"
+  },
+  {
+    "Id": 6,
+    "Name": "Diyorbek",
+    "Address": "Tashkent",
+    "PhoneNumber": "\u002B998336066666",
+    "Eamil": "diyorbek@gmail.com"
+  }
+]

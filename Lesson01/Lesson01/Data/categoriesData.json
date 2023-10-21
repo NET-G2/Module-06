@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Name": "Drinks",
+    "NumberOfProducts": 50
+  },
+  {
+    "Id": 2,
+    "Name": "Sweets",
+    "NumberOfProducts": 30
+  },
+  {
+    "Id": 3,
+    "Name": "Fruits",
+    "NumberOfProducts": 15
+  },
+  {
+    "Id": 4,
+    "Name": "Vegetables",
+    "NumberOfProducts": 20
+  },
+  {
+    "Id": 5,
+    "Name": "Milks",
+    "NumberOfProducts": 12
+  },
+  {
+    "Id": 6,
+    "Name": "Cosmetology",
+    "NumberOfProducts": 8
+  }
+]
