@@ -15,5 +15,10 @@
         public Teacher Teacher { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
+
+        public CourseGroup()
+        {
+            Enrollments = new List<Enrollment>();
+        }
     }
 }
