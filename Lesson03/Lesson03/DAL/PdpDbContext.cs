@@ -10,9 +10,13 @@ namespace Lesson03.DAL
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
         public virtual DbSet<Assignment> Assignments { get; set; }
+        public virtual DbSet<CourseGroup> Groups { get; set; }
 
         public PdpDbContext(DbContextOptions<PdpDbContext> options)
-            : base(options) { }
+            : base(options)
+        {
+            Database.Migrate();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -88,6 +92,11 @@ namespace Lesson03.DAL
                     e.GroupId,
                     e.StudentId
                 });
+            modelBuilder.Entity<Enrollment>()
+                .HasOne(e => e.Group)
+                .WithMany(g => g.Enrollments)
+                .HasForeignKey(e => e.GroupId)
+                .HasConstraintName("Enrollment_Course_FK");
 
             modelBuilder.Entity<CourseGroup>()
                 .ToTable("Course_Group");
@@ -96,6 +105,18 @@ namespace Lesson03.DAL
             modelBuilder.Entity<CourseGroup>()
                 .Property(cg => cg.Name)
                 .HasMaxLength(255);
+            modelBuilder.Entity<CourseGroup>()
+                .Property(cg => cg.StartDate)
+                .HasColumnType("date");
+            modelBuilder.Entity<CourseGroup>()
+                .Property(cg => cg.ExpectedFinishDate)
+                .HasColumnType("date")
+                .IsRequired(false);
+            modelBuilder.Entity<CourseGroup>()
+                .Property(cg => cg.ActualFinishDate)
+                .HasColumnType("date")
+                .IsRequired(false);
+
 
             base.OnModelCreating(modelBuilder);
         }

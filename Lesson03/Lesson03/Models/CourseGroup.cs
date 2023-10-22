@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateOnly StartDate { get; set; }
-        public DateOnly? ExpectedFinishDate { get; set; }
-        public DateOnly? ActualFinishDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? ExpectedFinishDate { get; set; }
+        public DateTime? ActualFinishDate { get; set; }
 
         public int SubjectId { get; set; }
         public Subject Subject { get; set; }
