@@ -1,5 +1,7 @@
-﻿namespace Lesson01.Models
+﻿using System;
+namespace Lesson01.Models
 {
+    [Serializable]
     public class Product
     {
         public int Id { get; set; }
