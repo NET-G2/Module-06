@@ -6,7 +6,9 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
+        public decimal HourlyRate { get; set; }
 
         public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<CourseGroup> Courses { get; set; }
     }
 }
