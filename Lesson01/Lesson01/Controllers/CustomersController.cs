@@ -15,8 +15,8 @@ namespace Lesson01.Controllers
 
         public ActionResult Index()
         {
-           var customers=_customerService.GetCustomers();
-            return View(customers); 
+            var customers = _customerService.GetCustomers();
+            return View(customers);
         }
 
         // GET: CustomersController/Details/5

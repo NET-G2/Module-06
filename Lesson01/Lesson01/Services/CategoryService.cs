@@ -8,7 +8,7 @@ namespace Lesson01.Services
         private static List<Category> _categories = new List<Category>();
         public CategoryService()
         {
-           LoadDataFromJson();
+            LoadDataFromJson();
         }
 
         public IEnumerable<Category> GetCategories() => _categories;
@@ -40,7 +40,7 @@ namespace Lesson01.Services
 
         public void SaveDataToJson()
         {
-            string json=JsonConvert.SerializeObject(_categories, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(_categories, Formatting.Indented);
             File.WriteAllText("categories.json", json);
         }
         public void LoadDataFromJson()

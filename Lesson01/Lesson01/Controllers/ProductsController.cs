@@ -1,6 +1,4 @@
 ﻿using Lesson01.Models;
-using Lesson01.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lesson01.Controllers
@@ -10,18 +8,19 @@ namespace Lesson01.Controllers
         private readonly ProductService _productService;
         public ProductsController()
         {
-             _productService = new ProductService();
+            _productService = new ProductService();
         }
         // GET: ProductsController
         public ActionResult Index()
-        {  var products=_productService.GetProducts();
+        {
+            var products = _productService.GetProducts();
             return View(products);
         }
 
         // GET: ProductsController/Details/5
         public ActionResult Details(int id)
-        {  
-            var product =_productService.FindById(id);
+        {
+            var product = _productService.FindById(id);
             if (product is null)
             {
                 return View("Error! Product not found");
@@ -68,7 +67,7 @@ namespace Lesson01.Controllers
         public ActionResult Edit(int id, Product productToUpdate)
         {
             try
-            {  
+            {
                 _productService.Update(productToUpdate);
                 return RedirectToAction(nameof(Index));
             }
@@ -96,7 +95,7 @@ namespace Lesson01.Controllers
         public ActionResult Delete(int id, Product product)
         {
             try
-            {   
+            {
                 _productService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
