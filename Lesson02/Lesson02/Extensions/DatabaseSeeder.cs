@@ -19,6 +19,7 @@ namespace Lesson02.Extensions
             var faker = new Faker();
             string[] categoryNames = faker.Commerce.Categories(25);
 
+            // ChangeTracker
             foreach (var categoryName in categoryNames)
             {
                 context.Categories.Add(new Models.Category()
