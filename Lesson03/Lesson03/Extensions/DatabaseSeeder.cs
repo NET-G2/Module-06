@@ -82,7 +82,7 @@ namespace Lesson03.Extensions
                     Description = _faker.Lorem.Sentences(),
                     NumberOfModules = _faker.Random.Int(5, 14),
                     Price = _faker.Random.Decimal(1_000_000, 3_000_000),
-                    TotalHours = _faker.Random.Double(30, 50)
+                    TotalHours = _faker.Random.Int(30, 50)
                 };
 
                 context.Subjects.Add(subject);

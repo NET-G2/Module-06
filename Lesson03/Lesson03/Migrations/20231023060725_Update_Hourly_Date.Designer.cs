@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lesson03.Migrations
 {
     [DbContext(typeof(PdpDbContext))]
-    [Migration("20231022100047_Update_Constraint_Name")]
-    partial class Update_Constraint_Name
+    [Migration("20231023060725_Update_Hourly_Date")]
+    partial class Update_Hourly_Date
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,9 +137,10 @@ namespace Lesson03.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Description")
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("NumberOfModules")
                         .HasColumnType("int");

@@ -10,5 +10,10 @@
 
         public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual ICollection<CourseGroup> Courses { get; set; }
+        public Teacher()
+        {
+            Assignments = new List<Assignment>();
+            Courses = new List<CourseGroup>();
+        }
     }
 }

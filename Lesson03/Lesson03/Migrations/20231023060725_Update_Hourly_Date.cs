@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Lesson03.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Create : Migration
+    public partial class Update_Hourly_Date : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace Lesson03.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<int>(type: "int", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     NumberOfModules = table.Column<int>(type: "int", nullable: false),
                     TotalHours = table.Column<double>(type: "float", nullable: false)
@@ -128,7 +128,7 @@ namespace Lesson03.Migrations
                     table.PrimaryKey("PK_Enrollment", x => x.Id);
                     table.UniqueConstraint("AK_Enrollment_GroupId_StudentId", x => new { x.GroupId, x.StudentId });
                     table.ForeignKey(
-                        name: "FK_Enrollment_Course_Group_GroupId",
+                        name: "Enrollment_Course_FK",
                         column: x => x.GroupId,
                         principalTable: "Course_Group",
                         principalColumn: "Id",
