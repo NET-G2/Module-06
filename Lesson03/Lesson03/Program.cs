@@ -1,3 +1,7 @@
+using Lesson03.DAL;
+using Lesson03.Extensions;
+using Microsoft.EntityFrameworkCore;
+
 namespace Lesson03
 {
     public class Program
@@ -6,10 +10,22 @@ namespace Lesson03
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<PdpDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("PdpDbConnection")));
+
+            builder.Services.AddScoped<PdpDbContext>();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                DatabaseSeeder.Initialize(services);
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
