@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Lesson03.Models.Student>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Student</h1>
+
+<form asp-controller="Students" asp-action="Index">
+    <p>
+        Search by name: <input type="text" name="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-order="@ViewData["IdSort"]">
+                @Html.DisplayNameFor(model => model.Id)
+                    <i class="fa fa-sort"> </i>
+                 </a>
+            </th>
+            <th>
+                <a asp-route-order="@ViewData["FullNameSort"]">
+                @Html.DisplayNameFor(model => model.FullName)
+                    <i class="fa fa-sort"> </i>
+                 </a>
+            </th>
+            <th>
+                <a asp-route-order="@ViewData["AgeSort"]">
+                    @Html.DisplayNameFor(model => model.Age)
+                    <i class="fa fa-sort"> </i>
+                </a> 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+     
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
