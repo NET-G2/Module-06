@@ -1,0 +1,85 @@
+﻿@model Lesson05.Models.Subject
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Subject</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfModules)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfModules)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalHours)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalHours)
+        </dd>
+    </dl>
+</div>
+
+
+@foreach(var module in Model.Modules)
+{
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="heading-@module.Id">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#@module.Id" aria-expanded="true" aria-controls="@module.Id">>
+                        @module.Name
+                    </button>
+                </h5>
+            </div>
+
+            <div id="@module.Id" class="collapse show" aria-labelledby="heading-@module.Id" data-parent="#accordion">
+                <div class="card-body">
+                    @module.Description
+                </div>
+
+                <div class="list-group">
+                    @foreach (var topic in module.Topics)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@module.Name</h5>
+                                <small>@topic.Title</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>@topic.Description</small>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
