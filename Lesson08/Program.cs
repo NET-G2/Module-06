@@ -1,4 +1,8 @@
+using Supermarket.Domain.Interfaces.Repositories;
+using Supermarket.Domain.Interfaces.Services;
 using Supermarket.Infrastructure.Persistence;
+using Supermarket.Infrastructure.Repositories;
+using Supermarket.Services;
 
 namespace Lesson08
 {
@@ -12,6 +16,10 @@ namespace Lesson08
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<SupermarketDbContext>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             var app = builder.Build();
 
