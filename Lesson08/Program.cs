@@ -1,3 +1,5 @@
+using Supermarket.Infrastructure.Persistence;
+
 namespace Lesson08
 {
     public class Program
@@ -8,6 +10,8 @@ namespace Lesson08
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<SupermarketDbContext>();
 
             var app = builder.Build();
 

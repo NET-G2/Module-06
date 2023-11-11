@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Supermarket.Domain.Entities;
 
 namespace Supermarket.Infrastructure.Persistence
 {
-    internal class SupermarketDbContext : DbContext
+    public class SupermarketDbContext : DbContext
     {
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
