@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Domain", "Super
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supermarket.Infrastructure", "Supermarket.Infrastructure\Supermarket.Infrastructure.csproj", "{FE94356B-BF37-4D9F-AAA8-D6E8F59983FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supermarket.Services", "..\Supermarket.Services\Supermarket.Services.csproj", "{179D45A9-5720-4698-A2AF-428DC7EC5BB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FE94356B-BF37-4D9F-AAA8-D6E8F59983FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE94356B-BF37-4D9F-AAA8-D6E8F59983FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE94356B-BF37-4D9F-AAA8-D6E8F59983FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179D45A9-5720-4698-A2AF-428DC7EC5BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179D45A9-5720-4698-A2AF-428DC7EC5BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179D45A9-5720-4698-A2AF-428DC7EC5BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179D45A9-5720-4698-A2AF-428DC7EC5BB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
