@@ -1,3 +1,8 @@
+using DiyorMarket.Domain.Interfaces.Repositories;
+using DiyorMarket.Extensions;
+using DiyorMarket.Infrastructure.Persistence;
+using DiyorMarket.Infrastructure.Persistence.Repositories;
+
 namespace DiyorMarket
 {
     public class Program
@@ -8,8 +13,26 @@ namespace DiyorMarket
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<DiyorMarketDbContext>();
+
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+            builder.Services.AddScoped<ISaleItemRepository, SaleItemRepository>();
+            builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+            builder.Services.AddScoped<ISupplyRepository, SupplyRepository>();
+            builder.Services.AddScoped<ISupplyItemRepository, SupplyItemRepository>();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                DatabaseSeeder.Initialize(services);
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

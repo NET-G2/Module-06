@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket", "DiyorMarket\DiyorMarket.csproj", "{1B4D296F-91D6-47DD-9D9A-B23B06471F02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Domain", "DiyorMarket.Domain\DiyorMarket.Domain.csproj", "{AF78E00D-8C33-492E-846C-1852A91FEC52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiyorMarket.Infrastructure", "DiyorMarket.Infrastructure\DiyorMarket.Infrastructure.csproj", "{7BECD002-1C6B-4EFE-92F4-DE23B4F047EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1B4D296F-91D6-47DD-9D9A-B23B06471F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B4D296F-91D6-47DD-9D9A-B23B06471F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B4D296F-91D6-47DD-9D9A-B23B06471F02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF78E00D-8C33-492E-846C-1852A91FEC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF78E00D-8C33-492E-846C-1852A91FEC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF78E00D-8C33-492E-846C-1852A91FEC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF78E00D-8C33-492E-846C-1852A91FEC52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BECD002-1C6B-4EFE-92F4-DE23B4F047EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BECD002-1C6B-4EFE-92F4-DE23B4F047EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BECD002-1C6B-4EFE-92F4-DE23B4F047EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BECD002-1C6B-4EFE-92F4-DE23B4F047EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
