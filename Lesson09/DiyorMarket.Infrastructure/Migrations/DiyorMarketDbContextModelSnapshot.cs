@@ -4,19 +4,16 @@ using DiyorMarket.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DiyorMarket.Infrastructure.Persistence.Migrations
+namespace DiyorMarket.Infrastructure.Migrations
 {
     [DbContext(typeof(DiyorMarketDbContext))]
-    [Migration("20231112101557_Initial_Create")]
-    partial class Initial_Create
+    partial class DiyorMarketDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,7 +119,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategory", (string)null);
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.Sale", b =>
@@ -164,7 +161,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -172,7 +169,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SaleId");
 
-                    b.ToTable("SaleItems");
+                    b.ToTable("SaleItem", (string)null);
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.Supplier", b =>
@@ -185,23 +182,27 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Company")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Supplier", (string)null);
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.Supply", b =>
@@ -222,7 +223,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Supplies");
+                    b.ToTable("Supply", (string)null);
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.SupplyItem", b =>
@@ -243,7 +244,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -251,7 +252,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SupplyId");
 
-                    b.ToTable("SupplyItems");
+                    b.ToTable("SupplyItem", (string)null);
                 });
 
             modelBuilder.Entity("DiyorMarket.Domain.Entities.ProductCategory", b =>

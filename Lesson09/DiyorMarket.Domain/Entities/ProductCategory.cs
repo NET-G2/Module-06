@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DiyorMarket.Domain.Entities
+﻿namespace DiyorMarket.Domain.Entities
 {
     public class ProductCategory
     {
@@ -15,5 +9,5 @@ namespace DiyorMarket.Domain.Entities
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-    }   
-}   
+    }
+}

@@ -1,6 +1,6 @@
-﻿using DiyorMarket.Domain.Entities;
+﻿using System.Reflection;
+using DiyorMarket.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace DiyorMarket.Infrastructure.Persistence
 {
@@ -16,10 +16,13 @@ namespace DiyorMarket.Infrastructure.Persistence
         public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<SupplyItem> SupplyItems { get; set; }
 
+        public DiyorMarketDbContext(DbContextOptions<DiyorMarketDbContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Data Source=MIRAZIZ\\SQLEXPRESS;Initial Catalog=Diyor_Market;Integrated Security=True;TrustServerCertificate=True;");
+                "Server=DESKTOP-11M5EOQ;Database=DiorMarket;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
 

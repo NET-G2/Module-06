@@ -1,7 +1,7 @@
 using DiyorMarket.Domain.Interfaces.Repositories;
-using DiyorMarket.Extensions;
 using DiyorMarket.Infrastructure.Persistence;
 using DiyorMarket.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiyorMarket
 {
@@ -13,7 +13,9 @@ namespace DiyorMarket
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<DiyorMarketDbContext>();
+
+            builder.Services.AddDbContext<DiyorMarketDbContext>(options =>
+                 options.UseSqlServer(builder.Configuration.GetConnectionString("DiyorMarket")));
 
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -27,11 +29,12 @@ namespace DiyorMarket
 
             var app = builder.Build();
 
+
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
 
-                DatabaseSeeder.Initialize(services);
+                // DatabaseSeeder.Initialize(services);
             }
 
             // Configure the HTTP request pipeline.
