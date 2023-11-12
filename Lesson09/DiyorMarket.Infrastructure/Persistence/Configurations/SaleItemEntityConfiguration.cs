@@ -16,7 +16,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(si => si.UnitPrice)
-                .HasColumnType("decimal(18, 2)")  
+                .HasColumnType("decimal(18, 2)")
                 .IsRequired();
 
             builder

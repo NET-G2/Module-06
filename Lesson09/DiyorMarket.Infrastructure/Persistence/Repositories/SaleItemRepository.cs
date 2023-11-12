@@ -5,7 +5,7 @@ namespace DiyorMarket.Infrastructure.Persistence.Repositories
 {
     public class SaleItemRepository : RepositoryBase<SaleItem>, ISaleItemRepository
     {
-        public SaleItemRepository(DiyorMarketDbContext context) 
+        public SaleItemRepository(DiyorMarketDbContext context)
             : base(context)
         { }
 

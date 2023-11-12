@@ -1,6 +1,6 @@
-﻿using DiyorMarket.Models;
+﻿using System.Diagnostics;
+using DiyorMarket.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace DiyorMarket.Controllers
 {
