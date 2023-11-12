@@ -25,14 +25,9 @@ namespace DiyorMarket
             builder.Services.AddScoped<ISupplyRepository, SupplyRepository>();
             builder.Services.AddScoped<ISupplyItemRepository, SupplyItemRepository>();
 
+            builder.Services.SeedDatabase();
+
             var app = builder.Build();
-
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                DatabaseSeeder.Initialize(services);
-            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
