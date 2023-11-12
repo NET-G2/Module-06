@@ -1,0 +1,9 @@
+﻿@using Supermarket.Domain.Entities;
+@model IEnumerable<Product>
+
+<div>
+    @foreach(var product in Model)
+    {
+        <div>@product.Name</div>
+    }
+</div>

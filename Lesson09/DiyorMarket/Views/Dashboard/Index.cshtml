@@ -1,0 +1,182 @@
+﻿@using DiyorMarket.Controllers
+@model ComboBoxFor
+@{
+    var data = new string[] {
+        "Все", "Напитки", "Овощи", "Фрукты"
+    };
+}
+
+<div class="row mb-5">
+    
+    <div class="col">
+        <a asp-action="Index" asp-controller="Dashboard" asp-route-category="All">
+            <div class="d-flex flex-row widget summary projects" onclick="onProjectsWidgetClick">
+                <div class="d-flex flex-column justify-content-center p-4">
+                    <i class="fa-solid fa-file-lines fa-2xl"></i>
+                </div>
+                <div class="d-flex flex-column m-auto py-3">
+                    <span class="lead">Summary</span>
+                    <h1 class="display-6 fw-bold">512</h1>
+                </div>
+            </div>
+        </a>
+        </div>
+
+    <div class="col">
+        <a asp-action="Index" asp-controller="Dashboard" asp-route-category="Finished">
+            <div class="d-flex flex-row widget summary finished">
+            <div class="d-flex flex-column justify-content-center p-4">
+                    <i class="fa-solid fa-money-bill-trend-up fa-2xl"></i>
+            </div>
+            <div class="d-flex flex-column m-auto py-3">
+                <span class="lead">Sales</span>
+                <h1 class="display-6 fw-bold">1200</h1>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <div class="col">
+        <a asp-action="Index" asp-controller="Dashboard" asp-route-category="InProccess">
+            <div class="d-flex flex-row widget summary in-process">
+                <div class="d-flex flex-column justify-content-center p-4">
+                    <i class="fa-sharp fa-solid fa-bolt fa-2xl"></i>
+                </div>
+                <div class="d-flex flex-column m-auto py-3">
+                    <span class="lead">Customers</span>
+                    <h1 class="display-6 fw-bold">125</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col">
+        <a asp-action="Index" asp-controller="Dashboard" asp-route-category="Debts">
+            <div class="d-flex flex-row widget summary debts">
+                <div class="d-flex flex-column justify-content-center p-4">
+                    <i class="fa-sharp fa-solid fa-file-invoice-dollar fa-2xl"></i>
+                </div>
+                <div class="d-flex flex-column m-auto py-3">
+                    <span class="lead">Products</span>
+                    <h1 class="display-6 fw-bold">352</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<style type="text/css" class="cssStyles">
+    .detailtable td {
+        font-size: 13px;
+        padding: 4px;
+        max-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: white;
+    }
+
+    #submitbutton {
+        margin: 10px auto;
+        text-align: center;
+    }
+</style>
+
+
+<script>
+
+function rowDataBoundEvent(args) {
+
+    if (args.data['IsDue']) {
+        args.row.bgColor = '#c44545';
+    }
+}
+
+function onProjectsWidgetClick(args) {
+    console.log(args);
+}
+
+</script>
+
+<script type="text/x-template" id="detailtemplate">
+    <table class="detailtable" width="100%">
+        <colgroup>
+            <col width="50" />
+            <col width="50" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Договор: </span> ${Contract}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Название объекта: </span> ${PropertyName}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Контактные данные: </span> ${ContactDetails}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Договор Статус: </span> ${ContractStatus}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Серийный номер: </span> ${SerialNumber}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Дата нач.монтажа: </span> ${new Date(InstallationStartDate).toLocaleDateString()}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Монтажник: </span> ${Fitter}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Статус монтажа: </span> ${InstallationStatus}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Дата окон.монтажа: </span> ${new Date(InstallationFinishDate).toLocaleDateString()}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Проблема: </span> ${Issues}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Документ Ф2/Ф3: </span> ${Document}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Паспорт лифта: </span> ${ElevatorPassport}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Статус проекта: </span> ${ProjectStatus}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Г/П: </span> ${GP}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: 500;">Тип лифта: </span> ${ElevatorType}
+                </td>
+                <td>
+                    <span style="font-weight: 500;">Взаиморасчёт: </span> ${MutualSettlement}
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2">
+                    <span style="font-weight: 500;">Серийные номера: </span>
+                    <br/>
+                    ${SerialNumbers}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</script>
