@@ -1,4 +1,6 @@
-﻿using DiyorMarket.Models;
+﻿using DiyorMarket.Domain.Interfaces.Repositories;
+using DiyorMarket.Infrastructure.Persistence;
+using DiyorMarket.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,9 +10,10 @@ namespace DiyorMarket.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICustomerRepository repo)
         {
             _logger = logger;
+            var r = repo.FindAll().Count();
         }
 
         public IActionResult Index()

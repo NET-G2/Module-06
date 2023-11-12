@@ -29,6 +29,9 @@ namespace DiyorMarket
 
             var app = builder.Build();
 
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(
+                "Mgo+DSMBMAY9C3t2VlhhQlVAfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn9Sd0djXn1WdXdWRmNa");
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -46,7 +49,7 @@ namespace DiyorMarket
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
             app.Run();
         }
