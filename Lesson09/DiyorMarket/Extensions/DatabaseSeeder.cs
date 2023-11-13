@@ -2,7 +2,6 @@
 using Bogus.DataSets;
 using DiyorMarket.Domain.Entities;
 using DiyorMarket.Infrastructure.Persistence;
-using DiyorMarket.Infrastructure.Persistence.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
@@ -32,7 +31,7 @@ namespace DiyorMarket.Extensions
 
                 UpdateCustomers(context);
 
-                //CreateSuppliers(context);
+                CreateSuppliers(context);
                 //CreateSupplies(context);
                 //CreateSupplyItems(context);
 
@@ -212,6 +211,26 @@ namespace DiyorMarket.Extensions
 
             var randomIndex = new Random().Next(0, values.Count);
             return values.ElementAt(randomIndex);
+        }
+
+        private static void CreateSuppliers(DiyorMarketDbContext context)
+        {
+            if (context.Suppliers.Any()) return;
+
+            List<Supplier> suppliers = new List<Supplier>();
+
+            for (int i = 0; i < 50; i++)
+            {
+                suppliers.Add(new Supplier()
+                {
+                    Company = _faker.Company.CompanyName(),
+                    FirstName = _faker.Name.FirstName(),
+                    LastName = _faker.Name.LastName(),
+                });
+            }
+
+            context.Suppliers.AddRange(suppliers);
+            context.SaveChanges();
         }
     }
 }

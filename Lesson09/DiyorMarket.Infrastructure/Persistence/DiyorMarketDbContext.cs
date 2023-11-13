@@ -19,7 +19,7 @@ namespace DiyorMarket.Infrastructure.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Data Source=MIRAZIZ\\SQLEXPRESS;Initial Catalog=Diyor_Market;Integrated Security=True;TrustServerCertificate=True;");
+                "Data Source=localhost\\SQLEXPRESS01;Initial Catalog=Diyor_Market;Integrated Security=True;TrustServerCertificate=True;");
             base.OnConfiguring(optionsBuilder);
         }
 
