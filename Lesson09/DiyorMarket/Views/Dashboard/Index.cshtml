@@ -1,7 +1,7 @@
 ﻿@using DiyorMarket.Controllers
 @model ComboBoxFor
 @{
-    var data = new string[] {
+    var data   = new string[] {
         "Все", "Напитки", "Овощи", "Фрукты"
     };
 }
@@ -65,6 +65,30 @@
     </div>
 </div>
 
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="widget chart">
+            <div class="p-4">
+                <h5 class="fw-bold">Sales By Category</h5>
+            </div>
+            <ejs-accumulationchart id="doughnutchart" enableSmartLabels background="#1a222b">
+                <e-accumulation-series-collection>
+                    <e-accumulation-series dataSource="@ViewBag.Categories"
+                                           xName="ProjectStatus" yName="Count"
+                                           innerRadius="60%" legendShape="Circle"
+                                           palettes=@(new string[]{"#0e8d76","#a4b219","#cb9b00","#8a442c","#0454b5","#7d0a0a","#822690","#4c2090","#313e93","#0096ac"})>
+                        <e-accumulationseries-datalabel name="formattedAmount" visible></e-accumulationseries-datalabel>
+                    </e-accumulation-series>
+                </e-accumulation-series-collection>
+                <e-accumulationchart-legendsettings position="Top" toggleVisibility="false">
+                    <e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
+                </e-accumulationchart-legendsettings>
+                <e-accumulationchart-tooltipsettings enable></e-accumulationchart-tooltipsettings>
+            </ejs-accumulationchart>
+        </div>
+    </div>
+</div>
+
 <style type="text/css" class="cssStyles">
     .detailtable td {
         font-size: 13px;
@@ -81,102 +105,3 @@
         text-align: center;
     }
 </style>
-
-
-<script>
-
-function rowDataBoundEvent(args) {
-
-    if (args.data['IsDue']) {
-        args.row.bgColor = '#c44545';
-    }
-}
-
-function onProjectsWidgetClick(args) {
-    console.log(args);
-}
-
-</script>
-
-<script type="text/x-template" id="detailtemplate">
-    <table class="detailtable" width="100%">
-        <colgroup>
-            <col width="50" />
-            <col width="50" />
-        </colgroup>
-        <tbody>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Договор: </span> ${Contract}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Название объекта: </span> ${PropertyName}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Контактные данные: </span> ${ContactDetails}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Договор Статус: </span> ${ContractStatus}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Серийный номер: </span> ${SerialNumber}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Дата нач.монтажа: </span> ${new Date(InstallationStartDate).toLocaleDateString()}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Монтажник: </span> ${Fitter}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Статус монтажа: </span> ${InstallationStatus}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Дата окон.монтажа: </span> ${new Date(InstallationFinishDate).toLocaleDateString()}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Проблема: </span> ${Issues}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Документ Ф2/Ф3: </span> ${Document}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Паспорт лифта: </span> ${ElevatorPassport}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Статус проекта: </span> ${ProjectStatus}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Г/П: </span> ${GP}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span style="font-weight: 500;">Тип лифта: </span> ${ElevatorType}
-                </td>
-                <td>
-                    <span style="font-weight: 500;">Взаиморасчёт: </span> ${MutualSettlement}
-                </td>
-            </tr>
-            
-            <tr>
-                <td colspan="2">
-                    <span style="font-weight: 500;">Серийные номера: </span>
-                    <br/>
-                    ${SerialNumbers}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</script>
