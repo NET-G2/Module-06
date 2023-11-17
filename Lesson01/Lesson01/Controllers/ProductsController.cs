@@ -8,7 +8,7 @@ namespace Lesson01.Controllers
         List<Product> products = new List<Product>();
 
         public ProductsController()
-        {
+        {   
             PopulateData();
         }
 
