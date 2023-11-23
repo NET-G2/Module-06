@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lesson11.Migrations
 {
     [DbContext(typeof(DiyorMarketDbContext))]
-    [Migration("20231119111515_Initial_Create")]
-    partial class Initial_Create
+    [Migration("20231121122544_initial_Create")]
+    partial class initial_Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,12 @@ namespace Lesson11.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -94,9 +99,6 @@ namespace Lesson11.Migrations
                     b.Property<int>("InventoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InventoryItem")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -107,7 +109,7 @@ namespace Lesson11.Migrations
 
                     b.HasIndex("InventoryId");
 
-                    b.HasIndex("InventoryItem");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("InventoryItem");
                 });
@@ -125,13 +127,12 @@ namespace Lesson11.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<decimal>("SalePrice")
                         .HasColumnType("decimal(18,2)");
@@ -282,7 +283,7 @@ namespace Lesson11.Migrations
 
                     b.HasOne("Lesson11.Models.Product", "Product")
                         .WithMany("InventoryItems")
-                        .HasForeignKey("InventoryItem")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
