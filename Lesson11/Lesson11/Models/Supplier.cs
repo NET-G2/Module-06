@@ -16,7 +16,6 @@ namespace Lesson11.Models
         public string PhoneNumber { get; set; }
         [Required]
         public string Company { get; set; }
-
         public virtual ICollection<Supply> Supplies { get; set; }
     }
 }

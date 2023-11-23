@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Lesson11.Models
 {
@@ -11,7 +13,8 @@ namespace Lesson11.Models
         [Required]
         [MaxLength(255, ErrorMessage = "Category name is required")]
         public string Name { get; set; }
-
+        [JsonIgnore]
+        [IgnoreDataMember]
         public virtual ICollection<Product> Products { get; set; }
     }
 }

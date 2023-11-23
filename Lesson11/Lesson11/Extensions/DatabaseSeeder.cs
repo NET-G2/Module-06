@@ -21,8 +21,10 @@ namespace Lesson11.Extensions
             CreateCustomers(context);
             CreateSales(context);
             CreateSaleItems(context);
+            CreateSuppliers(context);
+            CreateSupplies(context);
+            CreateSupplyItems(context);
         }
-
         private static void CreateCategories(DiyorMarketDbContext context)
         {
             if (context.Categories.Any()) return;
@@ -57,7 +59,6 @@ namespace Lesson11.Extensions
             context.AddRange(categories);
             context.SaveChanges();
         }
-
         public static void CreateProducts(DiyorMarketDbContext context)
         {
             if (context.Products.Any()) return;
@@ -104,7 +105,6 @@ namespace Lesson11.Extensions
             context.Products.AddRange(products);
             context.SaveChanges();
         }
-
         public static void CreateInventories(DiyorMarketDbContext context)
         {
             if (context.Inventories.Any()) return;
@@ -122,7 +122,24 @@ namespace Lesson11.Extensions
             context.Inventories.AddRange(inventories);
             context.SaveChanges();
         }
+        private static void CreateCustomers(DiyorMarketDbContext context)
+        {
+            if (context.Customers.Any()) return;
+            List<Customer> customers = new List<Customer>();
 
+            for (int i = 0; i < 125; i++)
+            {
+                customers.Add(new Customer()
+                {
+                    FirstName = _faker.Name.FirstName(),
+                    LastName = _faker.Name.LastName(),
+                    PhoneNumber = _faker.Phone.PhoneNumber("+998-##-###-##-##")
+                });
+            }
+
+            context.Customers.AddRange(customers);
+            context.SaveChanges();
+        }
         public static void CreateInventoryItems(DiyorMarketDbContext context)
         {
             if (context.InventoryItems.Any()) return;
@@ -149,26 +166,6 @@ namespace Lesson11.Extensions
             context.InventoryItems.AddRange(inventoryItems.Take(1));
             context.SaveChanges();
         }
-
-        private static void CreateCustomers(DiyorMarketDbContext context)
-        {
-            if (context.Customers.Any()) return;
-            List<Customer> customers = new List<Customer>();
-
-            for (int i = 0; i < 125; i++)
-            {
-                customers.Add(new Customer()
-                {
-                    FirstName = _faker.Name.FirstName(),
-                    LastName = _faker.Name.LastName(),
-                    PhoneNumber = _faker.Phone.PhoneNumber("+998-##-###-##-##")
-                });
-            }
-
-            context.Customers.AddRange(customers);
-            context.SaveChanges();
-        }
-
         private static void CreateSales(DiyorMarketDbContext context)
         {
             if (context.Sales.Any()) return;
@@ -188,11 +185,9 @@ namespace Lesson11.Extensions
                     });
                 }
             }
-
             context.Sales.AddRange(sales);
             context.SaveChanges();
         }
-
         private static void CreateSaleItems(DiyorMarketDbContext context)
         {
             if (context.SaleItems.Any()) return;
@@ -228,6 +223,78 @@ namespace Lesson11.Extensions
             }
 
             context.SaleItems.AddRange(saleItems);
+            context.SaveChanges();
+        }
+        private static void CreateSuppliers(DiyorMarketDbContext context)
+        {
+            if(context.Suppliers.Any()) return;
+            List<Supplier> suppliers = new List<Supplier>();
+            for(int i = 0;i<25;i++)
+            {
+                suppliers.Add(new Supplier()
+                {
+                    FullName = _faker.Name.FullName(),
+                    PhoneNumber = _faker.Phone.PhoneNumber("+9989-##-###-##-##"),
+                    Company=_faker.Company.CompanyName()
+                });
+            }
+            context.Suppliers.AddRange(suppliers);
+            context.SaveChanges();
+        }
+        private static void CreateSupplies(DiyorMarketDbContext context)
+        {
+            if( context.Supplies.Any()) return;
+            List<Supply> suplies = new List<Supply>(); 
+            var suppliers=context.Suppliers.ToList();
+            foreach(Supplier supplier in suppliers)
+            {
+                int suppliersCount = new Random().Next(1, 25);
+                for(int i=0;i<suppliersCount;i++)
+                {
+                    suplies.Add(new Supply()
+                    {
+                        SupplierId = supplier.Id,
+                        Date = _faker.Date.Between(DateTime.Now.AddYears(-3), DateTime.Now)
+                    });
+                }
+            }
+            context.Supplies.AddRange(suplies); 
+            context.SaveChanges();
+        }
+        private static void CreateSupplyItems(DiyorMarketDbContext context)
+        {
+            if (context.SupplyItems.Any()) return;
+            var supply = context.Supplies.ToList();
+            var product =context.Products.ToList();
+
+            List<SupplyItem> supplyItems = new List<SupplyItem>();
+
+            foreach ( var supplyItem in supply)
+            {
+                int supplyItemsCount=new Random().Next(1,20);
+                for(int i=0;i<supplyItemsCount;i++)
+                {
+                    var randomProduct = _faker.PickRandom(product);
+                    var randomSupply=_faker.PickRandom(supply);
+                    int attempts = 0;
+
+                    while(supplyItems.Any(si=>si.Id==randomProduct.Id)&& attempts < 100)
+                    {
+                        randomProduct = _faker.PickRandom(product);
+                    }
+                    
+                    var quantity=new Random().Next(1,20);
+
+                    supplyItems.Add(new SupplyItem
+                    {
+                        ProductId = randomProduct.Id,
+                        SupplyId= randomSupply.Id,
+                        Quantity = quantity,
+                        UnitPrice = randomProduct.SalePrice,
+                    });
+                }
+            }
+            context.SupplyItems.AddRange(supplyItems);
             context.SaveChanges();
         }
     }

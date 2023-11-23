@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Lesson11.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Create : Migration
+    public partial class initial_Create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,8 @@ namespace Lesson11.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -72,8 +73,8 @@ namespace Lesson11.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SalePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SupplyPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
@@ -137,7 +138,6 @@ namespace Lesson11.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    InventoryItem = table.Column<int>(type: "int", nullable: false),
                     InventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -150,8 +150,8 @@ namespace Lesson11.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InventoryItem_Product_InventoryItem",
-                        column: x => x.InventoryItem,
+                        name: "FK_InventoryItem_Product_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -219,9 +219,9 @@ namespace Lesson11.Migrations
                 column: "InventoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InventoryItem_InventoryItem",
+                name: "IX_InventoryItem_ProductId",
                 table: "InventoryItem",
-                column: "InventoryItem");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
