@@ -1,4 +1,10 @@
-﻿<div class="row">
+﻿<form asp-controller="Products" asp-action="Index">
+    <p>
+        Search by name: <input type="text" name="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<div class="row">
     <div class="d-flex justify-content-between">
         <div class="align-self-end">
             <form class="mt-3" asp-controller="products" method="get" asp-action="Index">
@@ -19,13 +25,6 @@
         </div>
     </div>
 
-    <form asp-controller="Products" asp-action="Index">
-        <p>
-            Search by name: <input type="text" name="SearchString" />
-            <input type="submit" value="Search" />
-        </p>
-    </form>
-
     <div class="px-4 pb-4">
         <ejs-grid id="products-list"
                   dataSource="@ViewBag.Products"
@@ -38,6 +37,7 @@
                 <e-grid-column headerText="Описание" field="Description" typeof="text"></e-grid-column>
                 <e-grid-column headerText="Приходная цена" field="SalePrice" typeof="text"></e-grid-column>
                 <e-grid-column headerText="Продажная цена" field="SupplyPrice" typeof="text"></e-grid-column>
+                <e-grid-column headerText="Идентификатор категории" field="CategoryId" typeof="text"></e-grid-column>
             </e-grid-columns>
         </ejs-grid>
     </div>

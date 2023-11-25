@@ -4,12 +4,10 @@ using Lesson11.Models;
 public class ProductService
 {
     private readonly DiyorMarketDbContext _dbContext;
-
     public ProductService(DiyorMarketDbContext dbContext)
     {
         _dbContext = dbContext;
     }
-
     public IEnumerable<Product> GetProducts() => _dbContext.Products.ToList();
     public void CreateProduct(Product product)
     {

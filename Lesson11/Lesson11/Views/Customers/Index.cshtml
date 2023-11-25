@@ -1,0 +1,33 @@
+﻿<div class="row">
+
+    <div class="d-flex justify-content-between">
+        @* Search *@
+        <form asp-controller="Customers" asp-action="Index">
+            <p>
+                Search by First Name: <input type="text" name="SearchString" />
+                <input type="submit" value="Search" />
+            </p>
+        </form>
+        @* Create *@
+        <div class="align-self-end mb-3">
+            <a class="btn btn-success " asp-action="Create">
+                Create Customers
+            </a>
+        </div>
+    </div>
+
+    <div class="px-4 pb-4">
+        <ejs-grid id="cumtomers-list"
+                  dataSource="@ViewBag.Customers"
+                  gridLines="Vertical"
+                  allowSorting="true">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="Идентификатор" field="Id" typeof="text"></e-grid-column>
+                <e-grid-column headerText="Имя" field="FirstName" typeof="text"></e-grid-column>
+                <e-grid-column headerText="Фамилия" field="LastName" typeof="text"></e-grid-column>
+                <e-grid-column headerText="Номер телефона" field="PhoneNumber" typeof="text"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
+    </div>
+</div>

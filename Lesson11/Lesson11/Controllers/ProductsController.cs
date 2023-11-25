@@ -2,7 +2,6 @@
 using Lesson11.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace Lesson11.Controllers
 {
@@ -10,7 +9,6 @@ namespace Lesson11.Controllers
     {
         private readonly DiyorMarketDbContext _context;
         private readonly ProductService _productService;
-
         public ProductsController(DiyorMarketDbContext context)
         {
             _context = context;
@@ -31,7 +29,19 @@ namespace Lesson11.Controllers
 
             return View();
         }
-        
+        [HttpPost]
+        public IActionResult Index(string searchString)
+        {
+            var products = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(p => p.Name.Contains(searchString));
+            }
+
+            ViewBag.Products = products.ToList();
+            return View();
+        }
         public IActionResult Create()
         {
             return View();

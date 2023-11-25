@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lesson11.Migrations
 {
     [DbContext(typeof(DiyorMarketDbContext))]
-    [Migration("20231121122544_initial_Create")]
-    partial class initial_Create
+    [Migration("20231125121425_initil-create")]
+    partial class initilcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
